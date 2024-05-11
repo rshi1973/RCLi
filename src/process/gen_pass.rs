@@ -1,5 +1,4 @@
 use rand::Rng;
-use zxcvbn::zxcvbn;
 
 pub fn process_genpass(
     length: u8,
@@ -7,7 +6,7 @@ pub fn process_genpass(
     lower: bool,
     number: bool,
     symbol: bool,
-) -> anyhow::Result<()> {
+) -> anyhow::Result<String> {
     let mut rng = rand::thread_rng();
     let mut password = String::new();
     let mut chars = Vec::new();
@@ -33,11 +32,5 @@ pub fn process_genpass(
         password.push(chars[idx] as char);
     }
 
-    println!("Password: {}", password);
-
-    //output password strength
-    let result = zxcvbn(&password, &[])?;
-    println!("Password strength: {}", result.score());
-
-    Ok(())
+    Ok(password)
 }
