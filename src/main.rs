@@ -1,12 +1,14 @@
 use anyhow::Result;
 use clap::Parser;
 use rcli::{CmdExector, Opts};
+use tracing::info;
 // rcli csv -i input.csv -o output.json --header -d ','
 // use zxcvbn::zxcvbn;
 
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
+    info!("Starting the application");
     let opts: Opts = Opts::parse();
 
     //match opts.cmd if it the command is csv, read the csv file and print the records
